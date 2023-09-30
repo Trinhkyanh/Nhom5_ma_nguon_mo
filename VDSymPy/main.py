@@ -1,3 +1,4 @@
+# mo 4 file trong folder VD va chay file main
 import sys
 import traceback
 
