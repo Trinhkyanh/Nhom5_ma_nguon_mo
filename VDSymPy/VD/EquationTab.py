@@ -18,18 +18,18 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
         self.layout = PyQt6.QtWidgets.QVBoxLayout()
 
         # add label
-        self.label = PyQt6.QtWidgets.QLabel("Equations")
+        self.label = PyQt6.QtWidgets.QLabel("phương trình")
 
         # add label to layout
         self.layout.addWidget(self.label)
 
         # add button
-        self.button = PyQt6.QtWidgets.QPushButton("Add Equation")
+        self.button = PyQt6.QtWidgets.QPushButton("Thêm phương trình")
 
         # add equation when button is clicked
         self.button.clicked.connect(self.add_equation)
 
-        self.refresh_button = PyQt6.QtWidgets.QPushButton("Refresh")
+        self.refresh_button = PyQt6.QtWidgets.QPushButton("Vẽ đồ thị")
         self.refresh_button.clicked.connect(self.refresh)
 
         # add button to layout

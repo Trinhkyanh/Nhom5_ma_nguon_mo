@@ -12,7 +12,7 @@ class Equation(PyQt6.QtWidgets.QWidget):
         self.text = ""
 
         # create the equation label
-        self.equation_text = PyQt6.QtWidgets.QLabel("TODO: Replace with nice latex equation")
+        self.equation_text = PyQt6.QtWidgets.QLabel("Nhập phương trình y=...")
 
         # create text box for the equation
         self.equation_text_box = PyQt6.QtWidgets.QLineEdit()
@@ -49,7 +49,7 @@ class Equation(PyQt6.QtWidgets.QWidget):
     def update_equation(self):
         self.text = self.equation_text_box.text()
         if self.text.count("=") > 1:
-            self.text = "Syntax Error"
+            self.text = "Lỗi cú pháp"
             self.equation_left = None
             self.equation_right = None
             return
