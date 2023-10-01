@@ -18,18 +18,18 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
         self.layout = PyQt6.QtWidgets.QVBoxLayout()
 
         # add label
-        self.label = PyQt6.QtWidgets.QLabel("phương trình")
+        self.label = PyQt6.QtWidgets.QLabel("Equations")
 
         # add label to layout
         self.layout.addWidget(self.label)
 
         # add button
-        self.button = PyQt6.QtWidgets.QPushButton("Thêm phương trình")
+        self.button = PyQt6.QtWidgets.QPushButton("Add Equation")
 
         # add equation when button is clicked
         self.button.clicked.connect(self.add_equation)
 
-        self.refresh_button = PyQt6.QtWidgets.QPushButton("Vẽ đồ thị")
+        self.refresh_button = PyQt6.QtWidgets.QPushButton("Refesh")
         self.refresh_button.clicked.connect(self.refresh)
 
         # add button to layout
@@ -58,20 +58,15 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
             if equation.equation_right is None:
                 continue
             lhs, rhs = equation.equation_left, equation.equation_right
+            intersection_points = sympy.solve(lhs - rhs, sympy.var("y"))
+
             for f in sympy.solve(lhs - rhs, sympy.var("y")):
+                label = f'y = {f}'
                 if plot is None:
-                    plot = sympy.plotting.plot(
-                        f,
-                        show=False,
-                        line_color=color,
-                        ylabel="y")
+                    plot = sympy.plotting.plot(f, show=False, line_color=color, ylabel="y", legend=True, label=label)
                 else:
-                    plot.extend(sympy.plotting.plot(
-                        f,
-                        show=False,
-                        line_color=color,
-                        ylabel="y")
-                    )
+                    plot.extend(
+                        sympy.plotting.plot(f, show=False, line_color=color, ylabel="y", legend=True, label=label))
         if plot is not None:
             if not os.path.exists("cache"):
                 os.mkdir("cache")
